@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.annotation.Rollback;
 
+import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @Slf4j
 public class UserRepositoryTest {
@@ -30,13 +30,12 @@ public class UserRepositoryTest {
         );
     }
     @Test
-    @Rollback
     void 유저_생성에_따른_PK_부여(){
         User savedUser = userRepository.save(user);
 
-        Assertions.assertNotNull(savedUser.getId());
-        Assertions.assertEquals(savedUser.getName(), user.getName());
-        Assertions.assertEquals(savedUser.getEmail(), user.getEmail());
+        assertThat(savedUser.getId()).isNotNull();
+        assertThat(savedUser.getName()).isEqualTo(user.getName());
+        assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
     }
 
 }
