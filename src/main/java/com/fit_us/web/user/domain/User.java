@@ -37,7 +37,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Profile profile;
 
     @Builder.Default
