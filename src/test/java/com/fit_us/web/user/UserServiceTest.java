@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 class UserServiceTest {
@@ -57,5 +58,16 @@ class UserServiceTest {
         assertThat(userRepository.findById(user.getId()).orElse(null))
                 .extracting(User::getDeletedAt)
                 .isNotNull();
+    }
+
+    @Test
+    void 존재하지_않는_유저_삭제_시_예외발생() {
+        // given
+        Long nonExistentUserId = 9999L;
+
+        // when & then
+        assertThatThrownBy(() -> userService.delete(nonExistentUserId))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("cannot found user");
     }
 }
