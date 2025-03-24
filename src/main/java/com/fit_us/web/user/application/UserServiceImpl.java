@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("cannot found user"));
         user.delete();
+        userRepository.save(user);
     }
     private User createUser(CreateUserCommand command) {
         if(command == null){

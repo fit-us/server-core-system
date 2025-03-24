@@ -37,7 +37,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Profile profile;
 
     @Builder.Default
@@ -64,5 +64,17 @@ public class User extends BaseEntity {
             throw new IllegalStateException("User is already deleted.");
         }
         this.deletedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", provider='" + provider + '\'' +
+                ", email='" + email + '\'' +
+                ", profile=" + profile +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }
