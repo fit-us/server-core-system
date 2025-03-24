@@ -71,7 +71,6 @@ public class User extends BaseEntity {
         return "User{" +
                 "name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", oauthId='" + oauthId + '\'' +
                 ", provider='" + provider + '\'' +
                 ", email='" + email + '\'' +
                 ", profile=" + profile +
