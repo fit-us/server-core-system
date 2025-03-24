@@ -35,5 +35,8 @@ public class UserServiceTest {
         //then
         Assertions.assertNotNull(user);
         Assertions.assertNotNull(user.getId());
+        Assertions.assertEquals(command.getName(), user.getName());
+        Assertions.assertEquals(command.getNickname(), user.getNickname());
+        Assertions.assertEquals(command.getEmail(), user.getEmail());
     }
 }
